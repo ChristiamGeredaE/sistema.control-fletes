@@ -48,17 +48,26 @@ public class Viaje {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="cliente_id",nullable = false)
-    @JsonBackReference
+    @JsonBackReference("cliente-viajes")
     private Cliente cliente;
 
     @OneToMany(mappedBy = "viaje",fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Pago>pagos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "viaje",fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Gasto>gastos = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="transporte_id",nullable = false)
+    @JsonBackReference("transporte-viajes")
+    private Transporte transporte;
 
 
 
-    public Viaje(String origen, String destino, Double kilometros, LocalDateTime fecha, BigDecimal costoPorKm,Cliente cliente) {
+
+    public Viaje(String origen, String destino, Double kilometros, LocalDateTime fecha, BigDecimal costoPorKm,Cliente cliente,Transporte transporte) {
         this.origen = origen;
         this.destino = destino;
         this.kilometros = kilometros;
@@ -66,6 +75,7 @@ public class Viaje {
         this.costoPorKm = costoPorKm;
         this.estado= EstadoViaje.PENDIENTE;
         this.cliente=cliente;
+        this.transporte = transporte;
 
     }
 }
