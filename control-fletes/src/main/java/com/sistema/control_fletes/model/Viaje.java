@@ -3,6 +3,7 @@ package com.sistema.control_fletes.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sistema.control_fletes.enums.EstadoViaje;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -42,13 +43,21 @@ public class Viaje {
     @Column(name= "estado",nullable = false)
     private EstadoViaje estado;
 
-    public Viaje(String origen, String destino, Double kilometros, LocalDateTime fecha, BigDecimal costoPorKm) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cliente_id",nullable = false)
+    @JsonBackReference
+    private Cliente cliente;
+
+
+
+    public Viaje(String origen, String destino, Double kilometros, LocalDateTime fecha, BigDecimal costoPorKm,Cliente cliente) {
         this.origen = origen;
         this.destino = destino;
         this.kilometros = kilometros;
         this.fecha = fecha;
         this.costoPorKm = costoPorKm;
         this.estado= EstadoViaje.PENDIENTE;
+        this.cliente=cliente;
 
     }
 }
