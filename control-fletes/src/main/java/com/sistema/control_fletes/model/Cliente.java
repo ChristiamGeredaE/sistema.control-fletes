@@ -33,7 +33,7 @@ public class Cliente {
     private String direccion;
 
     @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference("cliente-viajes")
     private List<Viaje>viajes = new ArrayList<>();
 
     public Cliente(String nombre, String telefono, String nit, String direccion) {
