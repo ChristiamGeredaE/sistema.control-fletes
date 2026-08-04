@@ -2,8 +2,11 @@ package com.sistema.control_fletes.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sistema.control_fletes.enums.EstadoViaje;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -47,6 +50,11 @@ public class Viaje {
     @JoinColumn(name="cliente_id",nullable = false)
     @JsonBackReference
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "viaje",fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Pago>pagos = new ArrayList<>();
+
 
 
 
