@@ -1,8 +1,14 @@
 package com.sistema.control_fletes.model;
 
-import java.lang.annotation.Inherited;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 @Table(name ="pilotos")
