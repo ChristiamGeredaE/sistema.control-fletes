@@ -64,6 +64,11 @@ public class Viaje {
     @JsonBackReference("transporte-viajes")
     private Transporte transporte;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "piloto_id", nullable = false)
+    @JsonBackReference("piloto-viajes")
+    private Piloto piloto;
+
 
 
 
